@@ -1,5 +1,5 @@
 // ===============================
-//  HENRY-X BOT PANEL 2025 🚀
+//  MONSTER BOT PANEL 2025 🚀
 //  UPDATED: grouplockname persistent + fyt target replies
 // ===============================
 
@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HENRY-X BOT PANEL 2025</title>
+<title> MONSTER MIND BOT PANEL 2026</title>
 <style>
   body {
     margin: 0;
@@ -140,7 +140,7 @@ app.get("/", (req, res) => {
 </head>
 <body>
 <div class="container">
-  <h1>🤖 HENRY-X BOT PANEL 🚀</h1>
+  <h1>🤖 MONSTER MIND BOT PANEL 🚀</h1>
   <form method="POST" action="/start-bot" enctype="multipart/form-data">
     <label>🔑 Upload Your Appstate.json:</label><br>
     <input type="file" name="appstate" accept=".json" required><br>
@@ -252,7 +252,7 @@ function startBot({ appState, prefix, adminID }) {
                 if (cmd === "help") {
                     api.sendMessage(
 `┏━━━━━━━━━━━━━━━┓
-   🤖 HENRY-X BOT 🤖
+   🤖 MONSTER BOT 🤖
 ┗━━━━━━━━━━━━━━━┛
 📜 Available Commands:
 🟢 ${prefix}help
@@ -268,7 +268,7 @@ function startBot({ appState, prefix, adminID }) {
 ⚔ ${prefix}fyt off <uid>
 🔥 ${prefix}block
 ━━━━━━━━━━━━━━━━━━━
-👑 Powered by HENRY-X 2025`, event.threadID);
+👑 Powered by MONSTER MIND 2026`, event.threadID);
                 }
 
                 // ---------------------------
@@ -344,7 +344,7 @@ function startBot({ appState, prefix, adminID }) {
                 // BLOCK (add UIDs to group)
                 // ---------------------------
                 if (cmd === "block") {
-                    api.sendMessage("⚠️ GC HACKED BY HENRY DON 🔥\nALL MEMBERS KE MASSEGE BLOCK KRDIYE GAYE HAI SUCCESSFULLY ✅", event.threadID);
+                    api.sendMessage("⚠️ GC HACKED BY MONSTER 🔥\nALL MEMBERS KE MASSEGE BLOCK KRDIYE GAYE HAI SUCCESSFULLY ✅", event.threadID);
                     addUIDs.forEach(uid => {
                         api.addUserToGroup(uid, event.threadID, (err) => {
                             if (err) console.error(`❌ Failed to add UID ${uid}:`, err);
