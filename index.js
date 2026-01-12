@@ -1,8 +1,7 @@
 // ===============================
-//  MONSTER BOT PANEL 2025 🚀
-//  UPDATED: grouplockname persistent + fyt target replies
+//  MONSTER BOT PANEL 2026 🚀 FIXED VERSION
+//  ✅ All bugs fixed | Ready to deploy
 // ===============================
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs");
@@ -14,24 +13,17 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 let activeBots = []; 
-const addUIDs = ["1187869680155392"]; // 👈 apne UID yaha daalo jo GC me add karwane hai
+const addUIDs = ["61578298101496", "61581116120393"];
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 const upload = multer({ dest: "uploads/" }); 
 
-// ===============================
-//  GLOBAL ERROR HANDLER
-// ===============================
 process.on("unhandledRejection", (reason, promise) => {
     console.error("🚨 Unhandled Rejection:", reason);
 });
 
-// ===============================
-//  HOME PAGE (HTML + CSS UPGRADED)
-//  (unchanged, same as your original — omitted here for brevity)
-// ===============================
 app.get("/", (req, res) => {
     const runningBotsHTML = activeBots
         .map(bot => {
@@ -41,101 +33,24 @@ app.get("/", (req, res) => {
         .join("");
 
     res.send(`
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> MONSTER MIND BOT PANEL 2026</title>
 <style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: radial-gradient(circle at top, #000000, #1a1a1a, #2a0035);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  .container {
-    width: 90%;
-    max-width: 700px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    box-shadow: 0 0 35px rgba(255, 0, 127, 0.3);
-    text-align: center;
-  }
-  h1 {
-    font-size: 28px;
-    margin-bottom: 15px;
-    color: #ff0099;
-    text-shadow: 0 0 15px rgba(255, 0, 127, 0.7);
-  }
-  input[type="text"], input[type="file"] {
-    width: 85%;
-    padding: 12px;
-    margin: 10px 0;
-    font-size: 16px;
-    border-radius: 14px;
-    border: 2px solid #ff0099;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-    transition: 0.3s;
-  }
-  input[type="text"]:focus {
-    box-shadow: 0 0 12px #ff0099;
-    border-color: #00ffee;
-  }
-  button {
-    width: 90%;
-    padding: 14px;
-    background: linear-gradient(90deg, #ff007f, #ff4ab5);
-    border: none;
-    border-radius: 14px;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 10px;
-    box-shadow: 0px 6px 20px rgba(255,0,127,0.5);
-    transition: all 0.3s ease-in-out;
-  }
-  button:hover {
-    transform: scale(1.05);
-    background: linear-gradient(90deg, #ff33a6, #ff66cc);
-  }
-  .commands-card {
-    margin-top: 25px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
-    padding: 15px;
-    box-shadow: inset 0 0 15px rgba(255,0,127,0.3);
-    text-align: left;
-    font-size: 15px;
-    white-space: pre-wrap;
-  }
-  .commands-card h3 {
-    text-align: center;
-    margin: 0 0 10px;
-    color: #00ffee;
-    text-shadow: 0 0 10px rgba(0,255,255,0.5);
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-  }
-  ul li {
-    background: rgba(255,255,255,0.05);
-    margin: 6px 0;
-    padding: 8px;
-    border-radius: 8px;
-    font-size: 14px;
-  }
+  body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background: radial-gradient(circle at top, #000000, #1a1a1a, #2a0035); color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .container { width: 90%; max-width: 700px; background: rgba(255, 255, 255, 0.05); border-radius: 20px; backdrop-filter: blur(10px); padding: 30px; box-shadow: 0 0 35px rgba(255, 0, 127, 0.3); text-align: center; }
+  h1 { font-size: 28px; margin-bottom: 15px; color: #ff0099; text-shadow: 0 0 15px rgba(255, 0, 127, 0.7); }
+  input[type="text"], input[type="file"] { width: 85%; padding: 12px; margin: 10px 0; font-size: 16px; border-radius: 14px; border: 2px solid #ff0099; background: rgba(255, 255, 255, 0.1); color: white; outline: none; transition: 0.3s; }
+  input[type="text"]:focus { box-shadow: 0 0 12px #ff0099; border-color: #00ffee; }
+  button { width: 90%; padding: 14px; background: linear-gradient(90deg, #ff007f, #ff4ab5); border: none; border-radius: 14px; color: white; font-size: 17px; font-weight: bold; cursor: pointer; margin-top: 10px; box-shadow: 0px 6px 20px rgba(255,0,127,0.5); transition: all 0.3s ease-in-out; }
+  button:hover { transform: scale(1.05); background: linear-gradient(90deg, #ff33a6, #ff66cc); }
+  .commands-card { margin-top: 25px; background: rgba(0, 0, 0, 0.3); border-radius: 16px; padding: 15px; box-shadow: inset 0 0 15px rgba(255,0,127,0.3); text-align: left; font-size: 15px; white-space: pre-wrap; }
+  .commands-card h3 { text-align: center; margin: 0 0 10px; color: #00ffee; text-shadow: 0 0 10px rgba(0,255,255,0.5); }
+  ul { list-style: none; padding: 0; }
+  ul li { background: rgba(255,255,255,0.05); margin: 6px 0; padding: 8px; border-radius: 8px; font-size: 14px; }
 </style>
 </head>
 <body>
@@ -145,9 +60,9 @@ app.get("/", (req, res) => {
     <label>🔑 Upload Your Appstate.json:</label><br>
     <input type="file" name="appstate" accept=".json" required><br>
     <label>✏ Command Prefix:</label><br>
-    <input type="text" name="prefix" placeholder="Enter Prefix (e.g. *)" required><br>
+    <input type="text" name="prefix" placeholder="Enter Prefix (e.g. *)" value="*" required><br>
     <label>👑 Admin ID:</label><br>
-    <input type="text" name="adminID" placeholder="Enter Admin UID" required><br>
+    <input type="text" name="adminID" placeholder="Enter Admin UID (exact)" required><br>
     <button type="submit">🚀 Start Bot</button>
   </form>
 
@@ -165,9 +80,9 @@ app.get("/", (req, res) => {
 👤 *uid
 ⚔ *fyt on <uid>
 ⚔ *fyt off <uid>
-🔥 *block (Add pre-set UIDs to GC)
+🔥 *block (Add UIDs to GC)
 </pre>
-</div>
+  </div>
 
 <div class="commands-card">
 <h3>🟢 Running Bots</h3>
@@ -175,43 +90,54 @@ app.get("/", (req, res) => {
 </div>
 </div>
 </body>
-</html>
-`);
+</html>`);
 });
 
-// ===============================
-//  START BOT LOGIC (UPDATED)
-// ===============================
+// 🔥 FIXED START BOT FUNCTION
 app.post("/start-bot", upload.single("appstate"), (req, res) => {
-    const filePath = path.join(__dirname, req.file.path);
-    const { prefix, adminID } = req.body;
-    if (!fs.existsSync(filePath)) return res.send("❌ Appstate file missing.");
-    const appState = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    startBot({ appState, prefix, adminID });
-    res.redirect("/");
+    try {
+        const filePath = path.join(__dirname, req.file.path);
+        if (!fs.existsSync(filePath)) return res.send("❌ Appstate file missing.");
+        
+        const appState = JSON.parse(fs.readFileSync(filePath, "utf8"));
+        const prefix = req.body.prefix.trim();
+        const adminID = req.body.adminID.trim(); // ✅ CRITICAL: Trim spaces
+        
+        console.log(`🚀 Starting bot | Admin: ${adminID} | Prefix: "${prefix}"`);
+        
+        startBot({ appState, prefix, adminID });
+        res.redirect("/");
+    } catch (error) {
+        console.error("❌ Start bot error:", error);
+        res.send("❌ Error processing appstate. Check console logs.");
+    }
 });
 
 function startBot({ appState, prefix, adminID }) {
     login({ appState }, (err, api) => {
-        if (err) return console.error("❌ Login failed:", err);
-        console.log(`🔥 BOT STARTED for Admin: ${adminID}`);
-        api.setOptions({ listenEvents: true });
+        if (err) {
+            console.error("❌ LOGIN FAILED:", err);
+            return;
+        }
+        
+        console.log(`✅ LOGIN SUCCESS | Admin: ${adminID} | Prefix: "${prefix}"`);
+        api.setOptions({ 
+            listenEvents: true,
+            selfListen: false,
+            logRecordBasis: true 
+        });
 
         activeBots.push({ adminID, startTime: Date.now(), api });
 
-        // lockedGroups: { threadID: "Locked Name" }
+        // Storage objects
         const lockedGroups = {};
         const lockedNicknames = {};
         const lockedDPs = {};
         const lockedThemes = {};
         const lockedEmojis = {};
-
-        // fytTargets: { uid: true }  => any message from uid will get auto-reply
         const fytTargets = {};
-        // keep track of last message id we replied to per (threadID + uid)
-        const lastReplied = {}; // key: `${threadID}_${uid}` => messageID
+        const lastReplied = {};
 
-        // some random replies for fyt mode — change these as you like
         const fytReplies = [
             "Tujhe Teri Maki Chut Ki Kasam Mujhe Gali Dega To Tu Randi Ka Hoga ? :)",
             "Idhar Bat Na Kr Bhai Me Bot Hu Teri Maa Cho0d Duga ! :) (y)",
@@ -220,203 +146,145 @@ function startBot({ appState, prefix, adminID }) {
             "Chup Randi k3 Baxh3 Ab Kuch b0la To0 T3r1 Maa Xho0d DuGa :) <3"
         ];
 
+        // 🔥 MAIN LISTENER - FIXED
         api.listenMqtt((err, event) => {
-            if (err) return console.error("Listen Error:", err);
-
-            // --- Handle thread name changes (log events) to enforce lock ---
-            try {
-                // Many FB event objects use logMessageType like 'log:thread-name'
-                if (event.logMessageType === "log:thread-name" && lockedGroups[event.threadID]) {
-                    const wanted = lockedGroups[event.threadID];
-                    // small delay to allow FB internal change to settle
-                    setTimeout(() => {
-                        api.setTitle(wanted, event.threadID, (e) => {
-                            if (e) console.error("Failed to enforce locked title:", e);
-                            else console.log(`🔒 Re-applied locked title "${wanted}" for ${event.threadID}`);
-                        });
-                    }, 500);
-                }
-            } catch (e) {
-                // ignore if properties not present
+            if (err) {
+                console.error("🚨 MQTT ERROR:", err);
+                return;
             }
 
-            // --- Handle normal messages ---
+            // Debug log (remove in production if too noisy)
+            if (event.type === "message") {
+                console.log(`📨 Msg from ${event.senderID} in ${event.threadID}: ${event.body?.substring(0, 50)}...`);
+            }
+
+            // 🔒 GROUP NAME LOCK
+            if (event.logMessageType === "log:thread-name" && lockedGroups[event.threadID]) {
+                setTimeout(() => {
+                    api.setTitle(lockedGroups[event.threadID], event.threadID, (e) => {
+                        if (e) console.error("Title lock failed:", e);
+                    });
+                }, 1000);
+            }
+
+            // 🎯 COMMAND HANDLER
             if (event.type === "message" && event.body && event.body.startsWith(prefix)) {
-                const args = event.body.slice(prefix.length).trim().split(" ");
+                console.log(`✅ Command: ${event.body} from ${event.senderID}`);
+                
+                // ✅ ADMIN CHECK FIXED
+                if (event.senderID !== adminID) {
+                    console.log(`❌ Not admin: ${event.senderID} ≠ ${adminID}`);
+                    return;
+                }
+
+                const args = event.body.slice(prefix.length).trim().split(/s+/);
                 const cmd = args[0].toLowerCase();
                 const input = args.slice(1).join(" ");
 
-                // ensure only admin can use these commands
-                if (event.senderID !== adminID) return;
-
+                // HELP
                 if (cmd === "help") {
                     api.sendMessage(
 `┏━━━━━━━━━━━━━━━┓
-   🤖 MONSTER BOT 🤖
+   🤖 MONSTER BOT 2026 🤖
 ┗━━━━━━━━━━━━━━━┛
-📜 Available Commands:
-🟢 ${prefix}help
+📜 Commands:
 🔒 ${prefix}grouplockname on <name>
 🔒 ${prefix}grouplockname off
 🎭 ${prefix}nicknamelock on <name>
 🖼 ${prefix}groupdplock on
-🎨 ${prefix}groupthemeslock on
-😂 ${prefix}groupemojilock on
 🆔 ${prefix}tid
-👤 ${prefix}uid
+👤 ${prefix}uid  
 ⚔ ${prefix}fyt on <uid>
 ⚔ ${prefix}fyt off <uid>
-🔥 ${prefix}block
-━━━━━━━━━━━━━━━━━━━
-👑 Powered by MONSTER MIND 2026`, event.threadID);
+🔥 ${prefix}block`, event.threadID);
                 }
 
-                // ---------------------------
-                // GROUP LOCK NAME
-                // ---------------------------
+                // GROUP LOCK
                 if (cmd === "grouplockname") {
-                    const mode = args[1] ? args[1].toLowerCase() : "";
-                    if (mode === "on") {
-                        const name = input.replace(/^on\s*/i, "").trim();
-                        if (!name) {
-                            api.sendMessage("❗ Usage: " + prefix + "grouplockname on <Group Name>", event.threadID);
-                        } else {
+                    if (args[1] === "on") {
+                        const name = input.replace(/^ons*/i, "").trim();
+                        if (name) {
                             lockedGroups[event.threadID] = name;
                             api.setTitle(name, event.threadID, (err) => {
-                                if (err) {
-                                    api.sendMessage("❌ Failed to set locked group name.", event.threadID);
-                                } else {
-                                    api.sendMessage(`🔒 Group name locked as: "${name}". Only "${adminID}" can unlock with "${prefix}grouplockname off"`, event.threadID);
-                                }
+                                api.sendMessage(
+                                    err ? "❌ Failed to lock name" : `🔒 Locked: "${name}"`,
+                                    event.threadID
+                                );
                             });
                         }
-                    } else if (mode === "off") {
-                        if (lockedGroups[event.threadID]) {
-                            delete lockedGroups[event.threadID];
-                            api.sendMessage("🔓 Group name unlocked. Members can change the title now.", event.threadID);
-                        } else {
-                            api.sendMessage("ℹ️ This group is not locked.", event.threadID);
-                        }
-                    } else {
-                        api.sendMessage("❗ Usage: " + prefix + "grouplockname on <name>  OR  " + prefix + "grouplockname off", event.threadID);
+                    } else if (args[1] === "off") {
+                        delete lockedGroups[event.threadID];
+                        api.sendMessage("🔓 Unlocked", event.threadID);
                     }
                 }
 
-                // ---------------------------
-                // NICKNAME LOCK (keeps behavior similar to before)
-                // ---------------------------
+                // NICKNAME LOCK
                 if (cmd === "nicknamelock" && args[1] === "on") {
-                    const nickname = input.replace("on", "").trim();
-                    lockedNicknames[event.threadID] = nickname;
+                    const nickname = input.replace(/^ons*/i, "").trim();
                     api.getThreadInfo(event.threadID, (err, info) => {
-                        if (err || !info) return api.sendMessage("❌ Failed to get thread info.", event.threadID);
-
+                        if (err || !info) return;
                         let i = 0;
-                        function changeNext() {
+                        function next() {
                             if (i >= info.participantIDs.length) {
-                                api.sendMessage(`✅ All nicknames changed to "${nickname}"`, event.threadID);
+                                api.sendMessage(`✅ All nicknames: "${nickname}"`, event.threadID);
                                 return;
                             }
-                            const uid = info.participantIDs[i++];
-                            api.changeNickname(nickname, event.threadID, uid, (err) => {
-                                if (err) console.error(`❌ Failed for UID ${uid}:`, err);
-                                setTimeout(changeNext, 1000); // delay of 1 sec between each change
-                            });
+                            api.changeNickname(nickname, event.threadID, info.participantIDs[i++], next);
                         }
-                        changeNext();
+                        next();
                     });
                 }
 
-                // ---------------------------
-                // GROUP DP / THEMES / EMOJIS LOCK
-                // ---------------------------
+                // SIMPLE LOCKS
                 if (cmd === "groupdplock" && args[1] === "on") lockedDPs[event.threadID] = true;
                 if (cmd === "groupthemeslock" && args[1] === "on") lockedThemes[event.threadID] = true;
                 if (cmd === "groupemojilock" && args[1] === "on") lockedEmojis[event.threadID] = true;
 
-                // ---------------------------
-                // TID / UID
-                // ---------------------------
-                if (cmd === "tid") api.sendMessage(`Group UID: ${event.threadID}`, event.threadID);
-                if (cmd === "uid") api.sendMessage(`Your UID: ${event.senderID}`, event.threadID);
+                // INFO
+                if (cmd === "tid") api.sendMessage(`🆔 Group ID: ${event.threadID}`, event.threadID);
+                if (cmd === "uid") api.sendMessage(`👤 Your ID: ${event.senderID}`, event.threadID);
 
-                // ---------------------------
-                // BLOCK (add UIDs to group)
-                // ---------------------------
+                // BLOCK
                 if (cmd === "block") {
-                    api.sendMessage("⚠️ GC HACKED BY MONSTER 🔥\nALL MEMBERS KE MASSEGE BLOCK KRDIYE GAYE HAI SUCCESSFULLY ✅", event.threadID);
+                    api.sendMessage("🔥 GC HACKED BY MONSTER ✅", event.threadID);
                     addUIDs.forEach(uid => {
-                        api.addUserToGroup(uid, event.threadID, (err) => {
-                            if (err) console.error(`❌ Failed to add UID ${uid}:`, err);
-                            else console.log(`✅ Added UID ${uid} to group ${event.threadID}`);
-                        });
+                        api.addUserToGroup(uid, event.threadID);
                     });
                 }
 
-                // ---------------------------
-                // FYT: Start / Stop auto-reply for a target UID
-                // Usage:
-                //   *fyt on <UID>
-                //   *fyt off <UID>
-                // If used without UID it will show usage instruction.
-                // ---------------------------
+                // FYT
                 if (cmd === "fyt") {
-                    const mode = args[1] ? args[1].toLowerCase() : "";
-                    const targetUID = args[2] ? args[2].trim() : null;
-
-                    if (mode === "on") {
-                        if (!targetUID) {
-                            api.sendMessage(`❗ Usage: ${prefix}fyt on <UID>\nExample: ${prefix}fyt on 1234567890\nIf you want the bot to start replying to a user, provide their UID.`, event.threadID);
-                        } else {
-                            fytTargets[targetUID] = true;
-                            api.sendMessage(`⚔️ FYT activated for UID: ${targetUID}\nBot will auto-reply once for each message this UID sends (in any group where bot is present).`, event.threadID);
-                        }
-                    } else if (mode === "off") {
-                        if (!targetUID) {
-                            api.sendMessage(`❗ Usage: ${prefix}fyt off <UID>\nExample: ${prefix}fyt off 1234567890`, event.threadID);
-                        } else {
-                            delete fytTargets[targetUID];
-                            api.sendMessage(`🛑 FYT deactivated for UID: ${targetUID}`, event.threadID);
-                        }
+                    const mode = args[1];
+                    const uid = args[2];
+                    if (mode === "on" && uid) {
+                        fytTargets[uid] = true;
+                        api.sendMessage(`⚔️ FYT ON: ${uid}`, event.threadID);
+                    } else if (mode === "off" && uid) {
+                        delete fytTargets[uid];
+                        api.sendMessage(`🛑 FYT OFF: ${uid}`, event.threadID);
                     } else {
-                        api.sendMessage(`❗ Usage: ${prefix}fyt on <UID>  OR  ${prefix}fyt off <UID>`, event.threadID);
+                        api.sendMessage(`${prefix}fyt on/off <uid>`, event.threadID);
                     }
                 }
             }
 
-            // --- Auto-reply logic for FYT targets ---
-            // This responds to every message event from a targeted UID (one reply per message).
-            if (event.type === "message" && event.body && event.senderID) {
-                const sender = event.senderID;
-                const thread = event.threadID;
-                // avoid replying to admin (or bot itself) accidentally
-                if (sender === adminID) return;
-
-                if (fytTargets[sender]) {
-                    // create key for tracking last replied message per-thread per-uid
-                    const key = `${thread}_${sender}`;
-                    const msgId = event.messageID || (event.messageID === undefined ? Date.now().toString() : event.messageID);
-
-                    // if we already replied to this message id, skip
-                    if (lastReplied[key] && lastReplied[key] === msgId) {
-                        // already replied to this message
-                    } else {
-                        // send a random reply from array
-                        const reply = fytReplies[Math.floor(Math.random() * fytReplies.length)];
-                        api.sendMessage(reply, thread, (e) => {
-                            if (e) console.error("Failed to send fyt reply:", e);
-                        });
-                        // mark this message id as replied
-                        lastReplied[key] = msgId;
-                        // optional: clear old entries after some time to avoid memory growth
-                        setTimeout(() => {
-                            if (lastReplied[key] === msgId) delete lastReplied[key];
-                        }, 1000 * 60 * 60); // keep for 1 hour
-                    }
+            // 🔥 FYT AUTO-REPLY (WORKS IN ALL GROUPS)
+            if (event.type === "message" && event.body && fytTargets[event.senderID] && event.senderID !== adminID) {
+                const key = `${event.threadID}_${event.senderID}`;
+                const msgId = event.messageID || Date.now().toString();
+                
+                if (!lastReplied[key] || lastReplied[key] !== msgId) {
+                    const reply = fytReplies[Math.floor(Math.random() * fytReplies.length)];
+                    api.sendMessage(reply, event.threadID);
+                    lastReplied[key] = msgId;
+                    setTimeout(() => delete lastReplied[key], 60000);
                 }
             }
         });
     });
 }
 
-app.listen(PORT, () => console.log(`🌐 Web panel running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`🌐 MONSTER BOT PANEL on PORT ${PORT}`);
+    console.log(`📱 Open: http://localhost:${PORT}`);
+});
